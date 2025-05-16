@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 @Table(name = "pessoa_fisica")
 public class PessoaFisica implements Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private final String tipoPessoa;
     private final String cpf;
     private final String nome;
@@ -16,9 +19,7 @@ public class PessoaFisica implements Pessoa {
     private final boolean aceiteTermosdeUso;
     @Embedded
     private final Endereco endereco;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
     public PessoaFisica(String tipoPessoa, String cpf, String nome, String celular, String telefone, String email, boolean aceiteTermosdeUso, Endereco endereco) {
         this.tipoPessoa = tipoPessoa;
