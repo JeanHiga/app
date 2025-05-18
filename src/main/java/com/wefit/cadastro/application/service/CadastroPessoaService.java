@@ -27,13 +27,14 @@ public class CadastroPessoaService {
 
     public void cadastrar(PessoaDto pessoaDto) {
         Pessoa pessoa = PessoaFactory.criarPessoa(pessoaDto);
-        if (pessoa instanceof PessoaFisica) {
-            cadastrarPessoaFisica((PessoaFisica) pessoa);
-        } else if (pessoa instanceof PessoaJuridica) {
-            cadastrarPessoaJuridica((PessoaJuridica) pessoa);
-        } else {
-            logger.error("Tipo de pessoa desconhecido: {}", pessoaDto.tipoPessoa());
-            throw new IllegalArgumentException("Tipo de pessoa desconhecido");
+
+        switch (pessoa) {
+            case PessoaFisica pessoaFisica -> cadastrarPessoaFisica(pessoaFisica);
+            case PessoaJuridica pessoaJuridica -> cadastrarPessoaJuridica(pessoaJuridica);
+            default -> {
+                logger.error("Tipo de pessoa não suportado {}", pessoaDto.tipoPessoa());
+                throw new IllegalArgumentException("Tipo de pessoa nao suportado");
+            }
         }
     }
 

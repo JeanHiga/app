@@ -24,11 +24,39 @@ src/
 
 ```
 
-## Instruções de Uso
+## Instruções de Uso com Docker
+No terminal, execute o comando abaixo na raiz do projeto (onde está o Dockerfile):
+
+```bash
+docker build -t app .
+
+Esse comando irá:
+
+Baixar uma imagem com Java 21 slim
+
+Compilar o projeto com Maven
+
+Gerar um .jar
+
+Empacotar tudo em uma imagem Docker chamada app
+
+Executar a aplicação
+Depois que a imagem estiver criada, inicie o container com:
+
+docker run -p 8080:8080 app
+
+Isso irá:
+
+Rodar sua aplicação Spring Boot no container
+
+Mapear a porta 8080 do container para a 8080 da sua máquina
+
+Agora, sua aplicação estará acessível em:
+📍 http://localhost:8080
 
 ### Pré-requisitos
 
-* Java Development Kit (JDK) 17 ou superior
+* Java Development Kit (JDK) 21 ou superior
 * Maven 3.9.x (já incluído no wrapper)
 * Banco de dados H2 (configurado no `application.properties`)
 

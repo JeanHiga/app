@@ -16,8 +16,8 @@ public class PessoaFactory {
                 pessoaDto.endereco().bairro(),
                 pessoaDto.endereco().estado());
 
-        if ("FISICA".equalsIgnoreCase(pessoaDto.tipoPessoa())) {
-            return new PessoaFisica(
+        return switch (pessoaDto.tipoPessoa().toUpperCase()) {
+            case "FISICA" -> new PessoaFisica(
                     pessoaDto.tipoPessoa(),
                     pessoaDto.cpf(),
                     pessoaDto.nome(),
@@ -26,8 +26,7 @@ public class PessoaFactory {
                     pessoaDto.email(),
                     pessoaDto.aceiteTermosDeUso(),
                     endereco);
-        } else if ("JURIDICA".equalsIgnoreCase(pessoaDto.tipoPessoa())) {
-            return new PessoaJuridica(
+            case "JURIDICA" -> new PessoaJuridica(
                     pessoaDto.tipoPessoa(),
                     pessoaDto.cnpj(),
                     pessoaDto.nome(),
@@ -36,8 +35,7 @@ public class PessoaFactory {
                     pessoaDto.email(),
                     pessoaDto.aceiteTermosDeUso(),
                     endereco);
-        } else {
-            throw new IllegalArgumentException("Tipo de pessoa inválido: " + pessoaDto.tipoPessoa());
-        }
+            default -> throw new IllegalArgumentException("Tipo de pessoa inválido: " + pessoaDto.tipoPessoa());
+        };
     }
 }
