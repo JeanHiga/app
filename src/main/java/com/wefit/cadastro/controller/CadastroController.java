@@ -29,7 +29,7 @@ public class CadastroController {
             logger.info("Pessoa cadastrada com sucesso");
             return new ResponseEntity<>("Pessoa Criada com sucesso",HttpStatus.CREATED);
         } catch (RuntimeException e) {
-            logger.error("Erro ao cadastrar pessoa: {}", e.getMessage());
+            logger.error("Erro em cadastrar a pessoa: {}", e.getMessage());
             return new ResponseEntity<>(e.getMessage(),HttpStatus.UNPROCESSABLE_ENTITY);
         } catch (Exception e) {
             logger.error("Erro ao cadastrar pessoa: {}", e.getMessage());
